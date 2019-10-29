@@ -3,6 +3,9 @@
 ## Project Description  
 The Crisp description for the project will be "CUBE FOR CUBE". This is an end-to-end BI solution for analyzing the Query log created by SSAS Server. The Query Log data is loaded into a dimensional model and a cube is built on top of it for analysis of cube usage.
 
+## This Fork
+The original code sample from msomakumar is designed as a star schema, and thus gave me some double counting when summing the total query duration. I have changed the database design to a many-to-many which eliminates the double counting.
+
 This project has two components 
 
 ### SSASQueryLogDecoder  
@@ -36,4 +39,4 @@ This is SSAS project which is built on the Dimension model created and loaded by
 
 Open the SSAS project , SSASQueryLogAnalyzer and Point to the Dimensional database created by the SSIS package.
 
-#### Note : This project has been upgraded to work with Visual Studio 2015 and SQL Server 2016 
+#### Note : This project has been upgraded to work with Visual Studio 2017 and SQL Server 2017 
