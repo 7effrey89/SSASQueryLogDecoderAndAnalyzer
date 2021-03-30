@@ -1,14 +1,14 @@
-﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
   <Target>
     <Database>SSASQueryLogAnalyzer</Database>
-    <Server>localhost</Server>
-    <ConnectionString>DataSource=localhost;Timeout=0</ConnectionString>
+    <Server>VDA1CD2326\VDA1CD2326</Server>
+    <ConnectionString>Data Source=VDA1CD2326\VDA1CD2326;Timeout=0</ConnectionString>
   </Target>
   <Options>
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -19,56 +19,63 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>9YQj6nLaAh7X9U/uJyKTuw==5/29/2011 12:15:13 AM5/29/2011 12:15:13 AM</TimeStamp>
+        <TimeStamp>17kKruPCh82QkLMf2m3YiOdHUXA=22-10-2019 11:06:2814-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>SSASQueryLogAnalyzer</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>IbYXbK653C0pj45Rj3fM7w==5/29/2011 1:42:40 AM5/29/2011 12:15:31 AM</TimeStamp>
+        <TimeStamp>5Z1U4zMIKPi/0xzCS9Pd3fJk4Kc=23-10-2019 13:36:3114-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>SSASQueryLogAnalyzer</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>pgpKDXeVPls0gyHbz3EcdQ==5/29/2011 1:44:02 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>wgLeY40GW8V5NF2aQI6C1En9lJ8=22-10-2019 15:59:1614-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>Dim Time</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Lb5aLGDVZrXOi6OfcjgWFw==5/29/2011 1:46:31 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>ujpJ2nVdGDMJCsmmX4G4Dp379pM=22-10-2019 09:33:4414-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>Dim Dimension</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>ktWESzAaJBj+GBtVdODmkQ==5/29/2011 12:54:49 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>PSqh5vLkASYvaK6AwwhvAWTR5qE=22-10-2019 16:14:0614-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>Dim Measure Group</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>LDTM8Zr0Dprr0iR64pkSzw==5/29/2011 1:54:35 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>uRWoQE2q6Gzae/cr7BZrsBkGS40=24-10-2019 16:48:1714-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>Dim Date</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>7XJrjuPEGY6CRuDQsXncHw==5/29/2011 12:51:01 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>sJdx/6hwts7DGYnXCfuPzFxQH5I=23-10-2019 13:37:0514-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>Dim User</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>UG/WM3EJ3hjk47ZdgeSF9plCNOM=23-10-2019 13:25:4923-10-2019 13:25:49</TimeStamp>
+        <ID>
+          <String>DimQuery</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>qSyeV0U+Dg/s27k00QRpkQ==5/29/2011 1:44:02 AM5/29/2011 12:32:24 AMk78CzASIOMheoK8YouyG7Q==5/29/2011 12:52:21 AM5/29/2011 12:32:24 AM</TimeStamp>
+        <TimeStamp>jDJeNpddPFQILSDoR/idYbCE9Hc=23-10-2019 14:35:4314-03-2018 09:33:5052npoLmQAONOotyXZ1M/oa3CJKI=23-10-2019 14:35:4314-03-2018 09:33:50</TimeStamp>
         <ID>
           <String>SSASQueryLogAnalyzer</String>
         </ID>
@@ -76,7 +83,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>xhwyrygXPgX2jHJr+lRZnQ==5/29/2011 12:07:43 AM5/29/2011 12:07:43 AM</TimeStamp>
+      <TimeStamp>5CcLae3UZ9sR8KSULrlY1zDh7X0=22-10-2019 09:33:4414-03-2018 09:33:50</TimeStamp>
       <ID>
         <String>SSASQueryLogAnalyzer</String>
       </ID>
@@ -85,5 +92,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2011-05-28T20:24:44Z</LastDeployed>
+  <LastDeployed>2019-10-24T14:48:22.696667Z</LastDeployed>
 </DeploymentSnapshot>

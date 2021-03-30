@@ -8,12 +8,12 @@
   DTS:DelayValidation="True"
   DTS:DTSID="{1A8C8906-15E6-4ABE-9659-26B3682C090D}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
   DTS:LocaleID="1033"
   DTS:ObjectName="SSASQueryLogDecoder"
   DTS:PackageType="5"
-  DTS:VersionBuild="151"
-  DTS:VersionGUID="{9D352D0B-C324-49EB-A479-40DB33138CC2}">
+  DTS:VersionBuild="182"
+  DTS:VersionGUID="{FD7B9E44-45FC-4F5C-A7BA-F17FD3DF7085}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
         DTS:Name="ServerName">@[User::CubeUsageServer]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=sorna-pc;Initial Catalog=CubeUsage;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{1F07AAFB-2C37-422A-8771-399D635EEC7A}SORNAS-PC.CubeUsage;" />
+          DTS:ConnectionString="Data Source=Test Dwh;Initial Catalog=Asset_obfuscation;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{1F07AAFB-2C37-422A-8771-399D635EEC7A}SORNAS-PC.CubeUsage;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -42,7 +42,7 @@
         DTS:Name="ServerName">@[User::QueryLogServer]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=sorna-pc;Initial Catalog=SSASQueryLog;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-Package-{1B53E8DB-1AFB-4520-ABE2-A116581DA60A}SORNAS-PC.QueryLog;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=Test dwh;Initial Catalog=NIMS_DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{1B53E8DB-1AFB-4520-ABE2-A116581DA60A}SORNAS-PC.QueryLog;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -54,7 +54,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="CubeUsageDB">
       <DTS:VariableValue
-        DTS:DataType="8">CubeUsage</DTS:VariableValue>
+        DTS:DataType="8">Asset_obfuscation</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -63,7 +63,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="CubeUsageServer">
       <DTS:VariableValue
-        DTS:DataType="8">sorna-pc</DTS:VariableValue>
+        DTS:DataType="8">Test Dwh</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -82,7 +82,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="OLAPDB">
       <DTS:VariableValue
-        DTS:DataType="8">Adventure Works DW</DTS:VariableValue>
+        DTS:DataType="8">NIMS_BI</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -91,7 +91,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="OLAPServer">
       <DTS:VariableValue
-        DTS:DataType="8">sorna-pc</DTS:VariableValue>
+        DTS:DataType="8">VDA1CD2326\VDA1CD2326</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -100,7 +100,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="QueryLogDB">
       <DTS:VariableValue
-        DTS:DataType="8">SSASQueryLog</DTS:VariableValue>
+        DTS:DataType="8">NIMS_DWH</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -109,7 +109,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="QueryLogServer">
       <DTS:VariableValue
-        DTS:DataType="8">sorna-pc</DTS:VariableValue>
+        DTS:DataType="8">Test dwh</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -127,7 +127,7 @@
       DTS:CreationName="Microsoft.Pipeline"
       DTS:DelayValidation="True"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{C46AC713-363B-45D1-B8E9-535B71C1AC91}"
+      DTS:DTSID="{e84d97d3-9308-4b56-8e4e-a303cdbf2a6d}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Cube Usage Fact - Load"
@@ -166,7 +166,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -214,17 +214,11 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Datekey]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TimeKey]"
                       cachedDataType="i4"
-                      cachedName="Datekey"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]" />
-                    <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Timekey]"
-                      cachedDataType="i4"
-                      cachedName="Timekey"
+                      cachedName="TimeKey"
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]" />
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[TimeKey]" />
                     <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UserId]"
                       cachedDataType="i4"
@@ -232,29 +226,29 @@
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]" />
                     <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DimensionAttribId]"
-                      cachedDataType="i4"
-                      cachedName="DimensionAttribId"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]" />
-                    <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CubeMeasureGroupId]"
                       cachedDataType="i4"
                       cachedName="CubeMeasureGroupId"
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]" />
                     <inputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QueryId]"
+                      cachedDataType="i4"
+                      cachedName="QueryId"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[QueryId]" />
+                    <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Duration]"
                       cachedDataType="i8"
                       cachedName="Duration"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Duration]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]" />
-                    <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OLAPQueryLogid]"
-                      cachedDataType="i4"
-                      cachedName="OLAPQueryLogid"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventId]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -275,21 +269,17 @@
                       dataType="i4"
                       name="UserId" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
-                      dataType="i4"
-                      name="DimensionAttribId" />
-                    <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
                       dataType="i4"
                       name="CubeMeasureGroupId" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
                       dataType="i4"
-                      name="duration" />
+                      name="QueryId" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventId]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Duration]"
                       dataType="i4"
-                      name="EventId" />
+                      name="Duration" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -343,7 +333,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -391,17 +381,11 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Datekey]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[TimeKey]"
                       cachedDataType="i4"
-                      cachedName="Datekey"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]" />
-                    <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Timekey]"
-                      cachedDataType="i4"
-                      cachedName="Timekey"
+                      cachedName="TimeKey"
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]" />
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[TimeKey]" />
                     <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[UserId]"
                       cachedDataType="i4"
@@ -409,23 +393,11 @@
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]" />
                     <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DimensionAttribId]"
-                      cachedDataType="i4"
-                      cachedName="DimensionAttribId"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]" />
-                    <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CubeMeasureGroupId]"
                       cachedDataType="i4"
                       cachedName="CubeMeasureGroupId"
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]" />
-                    <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Duration]"
-                      cachedDataType="i8"
-                      cachedName="Duration"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]" />
                     <inputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
                       cachedDataType="i4"
@@ -439,11 +411,17 @@
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
                     <inputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[OLAPQueryLogid]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DateKey]"
                       cachedDataType="i4"
-                      cachedName="OLAPQueryLogid"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EventId]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]" />
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[QueryId]"
+                      cachedDataType="i4"
+                      cachedName="QueryId"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[QueryId]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -464,17 +442,9 @@
                       dataType="i4"
                       name="UserId" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
-                      dataType="i4"
-                      name="DimensionAttribId" />
-                    <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
                       dataType="i4"
                       name="CubeMeasureGroupId" />
-                    <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
-                      dataType="i4"
-                      name="duration" />
                     <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Errorcode]"
                       codePage="1252"
@@ -488,9 +458,13 @@
                       length="200"
                       name="ErrorColumn" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EventId]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
                       dataType="i4"
-                      name="EventId" />
+                      name="QueryId" />
+                    <externalMetadataColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
+                      dataType="i4"
+                      name="DimensionAttribId" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -544,63 +518,17 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
-AttribInner.OLAPQueryLogid,DDA.Datekey,DT.Timekey,DU.UserId,DD.DimensionAttribId,DMG.CubeMeasureGroupId,AttribInner.Duration
-		  FROM 
-		(
-				SELECT Q.OLAPQueryLogid
-					  ,OS.OLAPServerId
-					  ,OD.OLAPDatabaseId
-					  ,OC.OLAPCubeId
-					  ,OCD.OLAPCubeDimensionId
-					  ,OA.OLAPAttributeId
-					  ,OMG.OLAPMeasureGroupId
-					  ,Attribused = SUBSTRING(REPLACE(Q.DataSet,',',''),OMGAR.Attribrank,1)
-					  ,Q.Datekey
-					  ,Q.TimeHour
-					  ,Q.TimeMinute
-					  ,Q.MSOLAP_User
-					  ,Q.Duration
-				  FROM OLAPMeasureGroupAttribRank OMGAR
-				  JOIN OLAPMeasureGroup OMG
-					ON OMGAR.OLAPMeasureGroupId = OMG.OLAPMeasureGroupId
-				  JOIN OLAPCubeDimension OCD
-					ON OCD.OLAPCubeDimensionId = OMGAR.OLAPCubeDimensionId
-				  JOIN OLAPAttribute OA
-					ON OMGAR.OLAPCubeDimensionId = OA.OLAPCubeDimensionId
-				   AND OMGAR.OLAPAttributeId = OA.OLAPAttributeId
-				  JOIN OLAPCube OC
-					ON OC.OLAPCubeId = OMGAR.OLAPCubeId
-				  JOIN OLAPDatabase OD
-					ON OD.OLAPDatabaseId = OMGAR.OLAPDatabaseId
-				  JOIN OLAPServer OS
-					ON OS.OLAPServerId = OMGAR.OLAPServerId
-				  JOIN OlapQueryLog Q
-					ON Q.MeasureIdName = OMG.OLAPMeasureGroupIDName
-				   AND Q.CubeName	   = OC.OLAPCubeName
-				   AND Q.Databasename  = OD.OLAPDatabasename
-				   AND Q.Servername	   = OS.OLAPServername
-AND Q.OLAPQueryLogid &lt;= 10000000
-		)		 AttribInner
-		JOIN  DimDimension DD
-		  ON  DD.ServerId		= AttribInner.OLAPServerId
-	     AND  DD.DatabaseId		= AttribInner.OLAPDatabaseId
-		 AND  DD.CubeId			= AttribInner.OLAPCubeId
-		 AND  DD.DimensionId	= AttribInner.OLAPCubeDimensionId
-		 AND  DD.AttribId		= AttribInner.OLAPAttributeId
-		JOIN  DimMeasureGroup DMG
-		  ON  DMG.ServerId				= AttribInner.OLAPServerId
-	     AND  DMG.DatabaseId			= AttribInner.OLAPDatabaseId
-		 AND  DMG.CubeId				= AttribInner.OLAPCubeId
-		 AND  DMG.MeasurGroupId			= AttribInner.OLAPMeasureGroupId
-		JOIN  DimDate DDA
-		  ON  DDA.Datekey	    = AttribInner.Datekey
-		JOIN  DimTime Dt
-		  ON  DT.[Hour]			= AttribInner.TimeHour
-		 AND  DT.[Minute]		= AttribInner.TimeMinute
-		JOIN  DimUser DU
-		  ON  DU.UserName	    = AttribInner.MSOLAP_User
-	   WHERE AttribInner.Attribused	= 1</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT oql.OLAPQueryLogid as QueryId
+	,oql.DateKey
+	,t.TimeKey
+	,mg.CubeMeasureGroupId
+	,u.UserId
+	,oql.Duration
+FROM OlapQueryLog AS oql
+INNER JOIN DimTime AS t ON oql.TimeHour = t.[Hour]
+	AND oql.TimeMinute = t.[Minute]
+INNER JOIN DimMeasureGroup AS mg ON mg.MeasureGroupIdName = oql.MeasureIdName
+INNER JOIN DimUser AS u ON isnull(u.UserName, 'Unknown') = isnull(oql.MSOLAP_User, 'Unknown')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -637,24 +565,6 @@ AND Q.OLAPQueryLogid &lt;= 10000000
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Datekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]"
-                      name="Datekey"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Timekey]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]"
-                      name="Timekey"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -662,15 +572,6 @@ AND Q.OLAPQueryLogid &lt;= 10000000
                       externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserId]"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]"
                       name="UserId"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimensionAttribId]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]"
-                      name="DimensionAttribId"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]"
@@ -682,6 +583,33 @@ AND Q.OLAPQueryLogid &lt;= 10000000
                       name="CubeMeasureGroupId"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[TimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TimeKey]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[TimeKey]"
+                      name="TimeKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[QueryId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QueryId]"
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[QueryId]"
+                      name="QueryId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]"
                       dataType="i8"
                       errorOrTruncationOperation="Conversion"
@@ -690,46 +618,33 @@ AND Q.OLAPQueryLogid &lt;= 10000000
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]"
                       name="Duration"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
-                      name="OLAPQueryLogid"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Datekey]"
-                      dataType="i4"
-                      name="Datekey" />
-                    <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Timekey]"
-                      dataType="i4"
-                      name="Timekey" />
                     <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserId]"
                       dataType="i4"
                       name="UserId" />
                     <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimensionAttribId]"
-                      dataType="i4"
-                      name="DimensionAttribId" />
-                    <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CubeMeasureGroupId]"
                       dataType="i4"
                       name="CubeMeasureGroupId" />
                     <externalMetadataColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TimeKey]"
+                      dataType="i4"
+                      name="TimeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QueryId]"
+                      dataType="i4"
+                      name="QueryId" />
+                    <externalMetadataColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Duration]"
                       dataType="i8"
                       name="Duration" />
-                    <externalMetadataColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
-                      dataType="i4"
-                      name="OLAPQueryLogid" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -738,30 +653,25 @@ AND Q.OLAPQueryLogid &lt;= 10000000
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QueryId]"
                       dataType="i4"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
-                      name="OLAPQueryLogid" />
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QueryId]"
+                      name="QueryId" />
                     <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Datekey]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
                       dataType="i4"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Datekey]"
-                      name="Datekey" />
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
                     <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Timekey]"
+                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TimeKey]"
                       dataType="i4"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Timekey]"
-                      name="Timekey" />
+                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TimeKey]"
+                      name="TimeKey" />
                     <outputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserId]"
                       dataType="i4"
                       lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserId]"
                       name="UserId" />
-                    <outputColumn
-                      refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimensionAttribId]"
-                      dataType="i4"
-                      lineageId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimensionAttribId]"
-                      name="DimensionAttribId" />
                     <outputColumn
                       refId="Package\Cube Usage Fact - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CubeMeasureGroupId]"
                       dataType="i4"
@@ -819,7 +729,7 @@ AND Q.OLAPQueryLogid &lt;= 10000000
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{1F07AAFB-2C37-422A-8771-399D635EEC7A}"
-          SQLTask:SqlStatementSource="IF OBJECT_ID('FactCubeUsage','U') IS NOT NULL&#xA;&#x9;DROP TABLE FactCubeUsage&#xA;&#xA;CREATE TABLE FactCubeUsage&#xA;(&#xA; CubeUsageId&#x9;&#x9;int IDENTITY(1,1) PRIMARY KEY&#xA;,EventId&#x9;&#x9;&#x9;int NULL&#xA;,Datekey&#x9;&#x9;&#x9;int NULL&#xA;,Timekey&#x9;&#x9;&#x9;int NULL&#xA;,UserId&#x9;&#x9;&#x9;&#x9;int NULL&#xA;,DimensionAttribId  int NULL&#xA;,CubeMeasureGroupId int NULL&#xA;,duration&#x9;&#x9;&#x9;int NULL&#xA;)&#xA;&#xA;IF OBJECT_ID('FactCubeUsage_ErrorLog','U') IS NOT NULL&#xA;&#x9;DROP TABLE FactCubeUsage_ErrorLog&#xA;&#xA;CREATE TABLE FactCubeUsage_ErrorLog&#xA;(&#xA; CubeUsageId&#x9;&#x9;int &#xA;,EventId&#x9;&#x9;&#x9;int NULL&#xA;,Datekey&#x9;&#x9;&#x9;int NULL&#xA;,Timekey&#x9;&#x9;&#x9;int NULL&#xA;,UserId&#x9;&#x9;&#x9;&#x9;int NULL&#xA;,DimensionAttribId  int NULL&#xA;,CubeMeasureGroupId int NULL&#xA;,duration&#x9;&#x9;&#x9;int NULL&#xA;,Errorcode&#x9;&#x9;VARCHAR(50)&#xA;,ErrorColumn&#x9;&#x9;varchar(200)&#xA;)&#xA;&#xA;IF OBJECT_ID('DimDate','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimDate&#xA;&#xA;CREATE TABLE DimDate&#xA;(&#xA; DateKey int PRIMARY KEY&#xA;,Date&#x9;Date&#xA;,Year    int&#xA;,Month   int&#xA;,MonthName varchar(20)&#xA;,Day&#x9;    int&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimTime','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimTime&#xA;&#xA;CREATE TABLE DimTime&#xA;(&#xA; TimeKey int identity(1,1) PRIMARY KEY&#xA;,Time&#x9;Time&#xA;,Hour&#x9;int&#xA;,Minute&#x9;int&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimUser','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimUser&#xA;&#xA;CREATE TABLE DimUser&#xA;(&#xA;UserId int identity(1,1) PRIMARY KEY&#xA;,UserName nvarchar(510)&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimDimension','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimDimension&#xA;&#xA;CREATE TABLE DimDimension&#xA;(&#xA;  DimensionAttribId int IDENTITY(1,1) PRIMARY KEY&#xA; ,ServerId int&#xA; ,ServerName sysname&#xA; ,DatabaseId int&#xA; ,DatabaseName sysname&#xA; ,CubeId  int&#xA; ,Cubename sysname&#xA; ,DimensionId int&#xA; ,DimensionName sysname&#xA; ,AttribId int&#xA; ,AttribName sysname&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimMeasureGroup','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimMeasureGroup&#xA;&#xA;CREATE TABLE DimMeasureGroup&#xA;(&#xA;  CubeMeasureGroupId int  IDENTITY(1,1) PRIMARY KEY&#xA; ,ServerId int&#xA; ,ServerName sysname&#xA; ,DatabaseId int&#xA; ,DatabaseName sysname&#xA; ,CubeId  int&#xA; ,Cubename sysname&#xA; ,MeasurGroupId int&#xA; ,MeasureGroupName sysname&#xA; ,MeasureGroupIdName sysname&#xA;)&#xA;&#xA;&#xA;&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimDate] FOREIGN KEY([Datekey])&#xA;REFERENCES [DimDate] ([DateKey])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimDate]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimDimension] FOREIGN KEY([DimensionAttribId])&#xA;REFERENCES [DimDimension] ([DimensionAttribId])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimDimension]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimMeasureGroup] FOREIGN KEY([CubeMeasureGroupId])&#xA;REFERENCES [DimMeasureGroup] ([CubeMeasureGroupId])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimMeasureGroup]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimTime] FOREIGN KEY([Timekey])&#xA;REFERENCES [DimTime] ([TimeKey])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimTime]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimUser] FOREIGN KEY([UserId])&#xA;REFERENCES [DimUser] ([UserId])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimUser]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF OBJECT_ID('BrQueryDimAttrUsage','U') IS NOT NULL&#xA;&#x9;DROP TABLE BrQueryDimAttrUsage&#xA;&#xA;CREATE TABLE BrQueryDimAttrUsage&#xA;(&#xA; BrQueryDimAttrUsage&#x9;&#x9;int IDENTITY(1,1) PRIMARY KEY&#xA;,QueryId&#x9;&#x9;&#x9;int NULL&#xA;,Datekey&#x9;&#x9;&#x9;int NULL&#xA;,Timekey&#x9;&#x9;&#x9;int NULL&#xA;,UserId&#x9;&#x9;&#x9;&#x9;int NULL&#xA;,DimensionAttribId  int NULL&#xA;,CubeMeasureGroupId int NULL&#xA;)&#xA;&#xA;IF OBJECT_ID('FactCubeUsage','U') IS NOT NULL&#xA;&#x9;DROP TABLE FactCubeUsage&#xA;CREATE TABLE FactCubeUsage&#xA;(&#xA;&#x9;CubeUsageId&#x9;&#x9;int IDENTITY(1,1) PRIMARY KEY,&#xA;&#x9;[QueryId] [int] NOT NULL,&#xA;&#x9;[Datekey] [int] NULL,&#xA;&#x9;[Timekey] [int] NULL,&#xA;&#x9;[UserId] [int] NULL,&#xA;&#x9;[Duration] int null,&#xA;&#x9;[CubeMeasureGroupId] [int] NULL&#xA;)&#xA;&#xA;IF OBJECT_ID('FactCubeUsage_ErrorLog','U') IS NOT NULL&#xA;&#x9;DROP TABLE FactCubeUsage_ErrorLog&#xA;CREATE TABLE FactCubeUsage_ErrorLog&#xA;(&#xA;&#x9;CubeUsageId&#x9;&#x9;int IDENTITY(1,1) PRIMARY KEY,&#xA;&#x9;[QueryId] [int] NOT NULL,&#xA;&#x9;[Datekey] [int] NULL,&#xA;&#x9;[Timekey] [int] NULL,&#xA;&#x9;[UserId] [int] NULL,&#xA;&#x9;DimensionAttribId  int NULL,&#xA;&#x9;[CubeMeasureGroupId] [int] NULL&#xA;&#x9;,Errorcode&#x9;&#x9;VARCHAR(50)&#xA;&#x9;,ErrorColumn&#x9;&#x9;varchar(200)&#xA;)&#xA;&#xA;IF OBJECT_ID('BrQueryDimAttrUsage_ErrorLog','U') IS NOT NULL&#xA;&#x9;DROP TABLE BrQueryDimAttrUsage_ErrorLog&#xA;&#xA;CREATE TABLE BrQueryDimAttrUsage_ErrorLog&#xA;(&#xA; BrQueryDimAttrUsage&#x9;&#x9;int &#xA;,QueryId&#x9;&#x9;&#x9;int NULL&#xA;,Datekey&#x9;&#x9;&#x9;int NULL&#xA;,Timekey&#x9;&#x9;&#x9;int NULL&#xA;,UserId&#x9;&#x9;&#x9;&#x9;int NULL&#xA;,DimensionAttribId  int NULL&#xA;,CubeMeasureGroupId int NULL&#xA;,Errorcode&#x9;&#x9;VARCHAR(50)&#xA;,ErrorColumn&#x9;&#x9;varchar(200)&#xA;)&#xA;&#xA;IF OBJECT_ID('DimDate','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimDate&#xA;&#xA;CREATE TABLE DimDate&#xA;(&#xA; DateKey int PRIMARY KEY&#xA;,Date&#x9;Date&#xA;,Year    int&#xA;,Month   int&#xA;,MonthName varchar(20)&#xA;,Day&#x9;    int&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimTime','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimTime&#xA;&#xA;CREATE TABLE DimTime&#xA;(&#xA; TimeKey int identity(1,1) PRIMARY KEY&#xA;,Time&#x9;Time&#xA;,Hour&#x9;int&#xA;,Minute&#x9;int&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimUser','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimUser&#xA;&#xA;CREATE TABLE DimUser&#xA;(&#xA;UserId int identity(1,1) PRIMARY KEY&#xA;,UserName nvarchar(510)&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimDimension','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimDimension&#xA;&#xA;CREATE TABLE DimDimension&#xA;(&#xA;  DimensionAttribId int IDENTITY(1,1) PRIMARY KEY&#xA; ,ServerId int&#xA; ,ServerName sysname&#xA; ,DatabaseId int&#xA; ,DatabaseName sysname&#xA; ,CubeId  int&#xA; ,Cubename sysname&#xA; ,DimensionId int&#xA; ,DimensionName sysname&#xA; ,AttribId int&#xA; ,AttribName sysname&#xA;)&#xA;&#xA;&#xA;IF OBJECT_ID('DimMeasureGroup','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimMeasureGroup&#xA;&#xA;CREATE TABLE DimMeasureGroup&#xA;(&#xA;  CubeMeasureGroupId int  IDENTITY(1,1) PRIMARY KEY&#xA; ,ServerId int&#xA; ,ServerName sysname&#xA; ,DatabaseId int&#xA; ,DatabaseName sysname&#xA; ,CubeId  int&#xA; ,Cubename sysname&#xA; ,MeasurGroupId int&#xA; ,MeasureGroupName sysname&#xA; ,MeasureGroupIdName sysname&#xA;)&#xA;&#xA;IF OBJECT_ID('DimQuery','U') IS NOT NULL&#xA;&#x9;DROP TABLE DimQuery&#xA;&#xA;CREATE TABLE DimQuery(&#xA;&#x9;[QueryKey] [int] IDENTITY(1,1) NOT NULL,&#xA;&#x9;[QueryId] [int] NOT NULL,&#xA;&#x9;[MSOLAP_Database] [nvarchar](255) NULL,&#xA;&#x9;[Duration] [bigint] NULL,&#xA;&#x9;[Servername] [sysname] NULL,&#xA;&#x9;[Databasename] [sysname] NULL,&#xA;&#x9;[CubeName] [sysname] NULL,&#xA;&#x9;[MeasureIdName] [sysname] NULL&#xA;)&#xA;&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage]  WITH CHECK ADD  CONSTRAINT [FK_BrQueryDimAttrUsage_DimDate] FOREIGN KEY([Datekey])&#xA;REFERENCES [DimDate] ([DateKey])&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage] CHECK CONSTRAINT [FK_BrQueryDimAttrUsage_DimDate]&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage]  WITH CHECK ADD  CONSTRAINT [FK_BrQueryDimAttrUsage_DimDimension] FOREIGN KEY([DimensionAttribId])&#xA;REFERENCES [DimDimension] ([DimensionAttribId])&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage] CHECK CONSTRAINT [FK_BrQueryDimAttrUsage_DimDimension]&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage]  WITH CHECK ADD  CONSTRAINT [FK_BrQueryDimAttrUsage_DimMeasureGroup] FOREIGN KEY([CubeMeasureGroupId])&#xA;REFERENCES [DimMeasureGroup] ([CubeMeasureGroupId])&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage] CHECK CONSTRAINT [FK_BrQueryDimAttrUsage_DimMeasureGroup]&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage]  WITH CHECK ADD  CONSTRAINT [FK_BrQueryDimAttrUsage_DimTime] FOREIGN KEY([Timekey])&#xA;REFERENCES [DimTime] ([TimeKey])&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage] CHECK CONSTRAINT [FK_BrQueryDimAttrUsage_DimTime]&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage]  WITH CHECK ADD  CONSTRAINT [FK_BrQueryDimAttrUsage_DimUser] FOREIGN KEY([UserId])&#xA;REFERENCES [DimUser] ([UserId])&#xA;&#xA;ALTER TABLE [BrQueryDimAttrUsage] CHECK CONSTRAINT [FK_BrQueryDimAttrUsage_DimUser]&#xA;&#xA;&#xA;&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimDate] FOREIGN KEY([Datekey])&#xA;REFERENCES [DimDate] ([DateKey])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimDate]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimMeasureGroup] FOREIGN KEY([CubeMeasureGroupId])&#xA;REFERENCES [DimMeasureGroup] ([CubeMeasureGroupId])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimMeasureGroup]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimTime] FOREIGN KEY([Timekey])&#xA;REFERENCES [DimTime] ([TimeKey])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimTime]&#xA;&#xA;ALTER TABLE [FactCubeUsage]  WITH CHECK ADD  CONSTRAINT [FK_FactCubeUsage_DimUser] FOREIGN KEY([UserId])&#xA;REFERENCES [DimUser] ([UserId])&#xA;&#xA;ALTER TABLE [FactCubeUsage] CHECK CONSTRAINT [FK_FactCubeUsage_DimUser]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -840,7 +750,7 @@ AND Q.OLAPQueryLogid &lt;= 10000000
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Analysis Management Object - AMO"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
@@ -849,6 +759,15 @@ AND Q.OLAPQueryLogid &lt;= 10000000
               VSTAMinorVersion="0"
               Language="CSharp"
               ReadOnlyVariables="User::CubeUsageDB,User::CubeUsageServer,User::OLAPCube,User::OLAPDB,User::OLAPServer,User::QueryLogDB,User::QueryLogServer,User::QueryLogTable">
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -968,39 +887,6 @@ AND Q.OLAPQueryLogid &lt;= 10000000
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
-              <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties.Settings.get_Default():ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties.Sett" +
-    "ings")]
-
-namespace ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties
-{
-
-
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-
-        public static Settings Default
-        {
-            get
-            {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
               <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[/*
@@ -1416,6 +1302,39 @@ public void Main()
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties.Settings.get_Default():ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_acda5acb95b24e75b3c77ab06f996a3c.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
                 Name="Properties\AssemblyInfo.cs"
                 Encoding="UTF8"><![CDATA[using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -1445,15 +1364,6 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-              <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1760,7 +1670,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Attribute Ranking for Dimension Usage"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1777,7 +1687,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Clean MetaData Tables"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1825,12 +1735,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Date Dimesnion - Load"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{1F07AAFB-2C37-422A-8771-399D635EEC7A}"
-              SQLTask:SqlStatementSource="DELETE FROM DimDate &#xA;&#xA;DECLARE @StartDate DATETIME&#xA;DECLARE @EndDate  DATETIME&#xA;&#xA;SELECT @StartDate = '01-Jan-2007'&#xA;SELECT @EndDate = '31-Dec-2011'&#xA;&#xA;&#xA;WHILE @StartDate &lt;= @EndDate&#xA;BEGIN&#xA;&#xA; INSERT INTO DimDate&#xA; (DateKey,Date,Year,Month,MonthName,Day)&#xA; SELECT  CONVERT(INT,Convert(varchar(4),YEAR(@StartDate)) &#xA;&#x9;&#x9; + CASE &#xA;&#x9;&#x9;   WHEN MONTH(@StartDate) &lt;=9 THEN '0'&#xA;&#x9;&#x9;   ELSE ''&#xA;&#x9;&#x9;   END +  Convert(varchar(2),MONTH(@StartDate)) &#xA;&#x9;&#x9;+ CASE &#xA;&#x9;&#x9;   WHEN DAY(@StartDate) &lt;=9 THEN '0'&#xA;&#x9;&#x9;   ELSE ''&#xA;&#x9;&#x9;   END +Convert(varchar(2),DAY(@StartDate)))&#xA;     ,@StartDate&#xA;     ,YEAR(@StartDate)&#xA;     ,MONTH(@StartDate)&#xA;     ,DATENAME(MONTH,@StartDate)&#xA;     ,DAY(@StartDate)&#xA;     &#xA; Select @StartDate = DATEADD(DAY,1, @StartDate)&#xA;END&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="DELETE FROM DimDate &#xA;&#xA;DECLARE @StartDate DATETIME&#xA;DECLARE @EndDate  DATETIME&#xA;&#xA;SELECT @StartDate = '01-Jan-2019'&#xA;SELECT @EndDate = '31-Dec-2020'&#xA;&#xA;&#xA;WHILE @StartDate &lt;= @EndDate&#xA;BEGIN&#xA;&#xA; INSERT INTO DimDate&#xA; (DateKey,Date,Year,Month,MonthName,Day)&#xA; SELECT  CONVERT(INT,Convert(varchar(4),YEAR(@StartDate)) &#xA;&#x9;&#x9; + CASE &#xA;&#x9;&#x9;   WHEN MONTH(@StartDate) &lt;=9 THEN '0'&#xA;&#x9;&#x9;   ELSE ''&#xA;&#x9;&#x9;   END +  Convert(varchar(2),MONTH(@StartDate)) &#xA;&#x9;&#x9;+ CASE &#xA;&#x9;&#x9;   WHEN DAY(@StartDate) &lt;=9 THEN '0'&#xA;&#x9;&#x9;   ELSE ''&#xA;&#x9;&#x9;   END +Convert(varchar(2),DAY(@StartDate)))&#xA;     ,@StartDate&#xA;     ,YEAR(@StartDate)&#xA;     ,MONTH(@StartDate)&#xA;     ,DATENAME(MONTH,@StartDate)&#xA;     ,DAY(@StartDate)&#xA;     &#xA; Select @StartDate = DATEADD(DAY,1, @StartDate)&#xA;END&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1843,7 +1753,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Dimension Dimension - Load"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1861,12 +1771,481 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="MeasureGroup Dimension - Load"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{1F07AAFB-2C37-422A-8771-399D635EEC7A}"
               SQLTask:SqlStatementSource="DELETE FROM DimMeasureGroup&#xA;&#xA;INSERT INTO DimMeasureGroup&#xA;(&#xA;ServerId,ServerName,DatabaseId,DatabaseName,CubeId,Cubename,MeasurGroupId,MeasureGroupName,MeasureGroupIdName)&#xA;SELECT OS.OLAPServerId&#xA;   ,OS.OLAPServerName&#xA;   ,OD.OLAPDatabaseId&#xA;   ,OD.OLAPDatabaseName&#xA;   ,OC.OLAPCubeId&#xA;   ,OC.OLAPCubeName&#xA;   ,OMG.OLAPMeasureGroupId&#xA;   ,OMG.OLAPMeasureGroupName&#xA;   ,OMG.OLAPMeasureGroupIDName&#xA;  FROM OLAPServer OS&#xA;  JOIN OLAPDatabase OD&#xA;    ON OS.OLAPServerId = OD.OLAPServerId&#xA;  JOIN OLAPCube OC&#xA;    ON OC.OLAPDatabaseId = OD.OLAPDatabaseId&#xA;  JOIN OLAPMeasureGroup OMG&#xA;    ON OMG.OLAPCubeId = OC.OLAPCubeId&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimensions\Query Dimension - Delete"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="DimUser"
+          DTS:DTSID="{f8877c0e-e59d-4e56-ac4a-f182f9c101a1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Query Dimension - Delete"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="5">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1F07AAFB-2C37-422A-8771-399D635EEC7A}"
+              SQLTask:SqlStatementSource="DELETE FROM DimQuery" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimensions\Query Dimension - Load"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{d1dcbedc-e084-4f6f-85be-0ad2a5d77560}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Query Dimension - Load"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimQuery]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CubeUsageDW]"
+                      connectionManagerRefId="Package.ConnectionManagers[CubeUsageDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MSOLAP_Database]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="MSOLAP_Database"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MSOLAP_Database]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSOLAP_Database]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Duration]"
+                          cachedDataType="i8"
+                          cachedName="Duration"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Duration]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Servername]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="Servername"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Servername]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Servername]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Databasename]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="Databasename"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Databasename]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Databasename]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CubeName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="CubeName"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeName]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeName]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MeasureIdName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="MeasureIdName"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MeasureIdName]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MeasureIdName]" />
+                        <inputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OLAPQueryLogid]"
+                          cachedDataType="i4"
+                          cachedName="OLAPQueryLogid"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryKey]"
+                          dataType="i4"
+                          name="QueryKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                          dataType="i4"
+                          name="QueryId" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MSOLAP_Database]"
+                          dataType="wstr"
+                          length="255"
+                          name="MSOLAP_Database" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Duration]"
+                          dataType="i8"
+                          name="Duration" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Servername]"
+                          dataType="wstr"
+                          length="128"
+                          name="Servername" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Databasename]"
+                          dataType="wstr"
+                          length="128"
+                          name="Databasename" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeName]"
+                          dataType="wstr"
+                          length="128"
+                          name="CubeName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MeasureIdName]"
+                          dataType="wstr"
+                          length="128"
+                          name="MeasureIdName" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [OLAPQueryLogid]
+      ,[MSOLAP_Database]
+      ,[Duration]
+      ,[Servername]
+      ,[Databasename]
+      ,[CubeName]
+      ,[MeasureIdName]
+  FROM [OlapQueryLog]</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CubeUsageDW]"
+                      connectionManagerRefId="Package.ConnectionManagers[CubeUsageDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
+                          name="OLAPQueryLogid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSOLAP_Database]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MSOLAP_Database]"
+                          length="255"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSOLAP_Database]"
+                          name="MSOLAP_Database"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Duration]"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Duration]"
+                          name="Duration"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Servername]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Servername]"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Servername]"
+                          name="Servername"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Databasename]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Databasename]"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Databasename]"
+                          name="Databasename"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CubeName]"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeName]"
+                          name="CubeName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MeasureIdName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MeasureIdName]"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[MeasureIdName]"
+                          name="MeasureIdName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
+                          dataType="i4"
+                          name="OLAPQueryLogid" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MSOLAP_Database]"
+                          dataType="wstr"
+                          length="255"
+                          name="MSOLAP_Database" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Duration]"
+                          dataType="i8"
+                          name="Duration" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Servername]"
+                          dataType="wstr"
+                          length="128"
+                          name="Servername" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Databasename]"
+                          dataType="wstr"
+                          length="128"
+                          name="Databasename" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CubeName]"
+                          dataType="wstr"
+                          length="128"
+                          name="CubeName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MeasureIdName]"
+                          dataType="wstr"
+                          length="128"
+                          name="MeasureIdName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
+                          name="OLAPQueryLogid" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MSOLAP_Database]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MSOLAP_Database]"
+                          name="MSOLAP_Database" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Duration]"
+                          dataType="i8"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Duration]"
+                          name="Duration" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Servername]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Servername]"
+                          name="Servername" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Databasename]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Databasename]"
+                          name="Databasename" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CubeName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CubeName]"
+                          name="CubeName" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MeasureIdName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MeasureIdName]"
+                          name="MeasureIdName" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Load Dimensions\Query Dimension - Load.Paths[OLE DB Source Output]"
+                  endId="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Load Dimensions\Query Dimension - Load\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1879,7 +2258,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Time Dimension - Load"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1897,7 +2276,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="User Dimension - Delete"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1947,7 +2326,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2066,7 +2445,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT MSOLAP_USER FROM OLAPQueryLog</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT isnull(MSOLAP_USER ,'Unknown') as MSOLAP_USER FROM OLAPQueryLog</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -2171,6 +2550,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Load Dimensions\User Dimension - Load" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dimensions.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A1CA6E99-7313-4A37-B6C9-007514E0B3EA}"
+          DTS:From="Package\Load Dimensions\Query Dimension - Delete"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Load Dimensions\Query Dimension - Load" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -2448,7 +2835,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2702,7 +3089,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT MSOLAP_Database
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT MSOLAP_Database
 	  ,MSOLAP_ObjectPath
 	  ,MSOLAP_User
 	  ,Dataset
@@ -2730,7 +3117,7 @@ WHERE MSOLAP_Database = ?</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping">"Parameter0",{9741DF1E-05BC-4225-AF88-23B3C3641402};</property>
+                      name="ParameterMapping">"Parameter0:Input",{9741DF1E-05BC-4225-AF88-23B3C3641402};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2917,7 +3304,7 @@ WHERE MSOLAP_Database = ?</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="OLAPQueryLog Table - Delete"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2946,7 +3333,7 @@ WHERE MSOLAP_Database = ?</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="MetaData Tables - Create"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -2963,12 +3350,657 @@ WHERE MSOLAP_Database = ?</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Query Log Table - Create"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{1F07AAFB-2C37-422A-8771-399D635EEC7A}"
           SQLTask:SqlStatementSource="IF OBJECT_ID('OlapQueryLog','U') IS NOT NULL&#xA;&#x9;DROP TABLE OlapQueryLog&#xA;&#x9;&#xA;CREATE TABLE [dbo].[OlapQueryLog]&#xA;(&#xA;&#x9;OLAPQueryLogid&#x9;int IDENTITY(1,1) PRIMARY KEY,&#xA;&#x9;[MSOLAP_Database] [nvarchar](255) NULL,&#xA;&#x9;[MSOLAP_ObjectPath] [nvarchar](4000) NULL,&#xA;&#x9;[MSOLAP_User] [nvarchar](255) NULL,&#xA;&#x9;[Dataset] [nvarchar](4000) NULL,&#xA;&#x9;[StartTime] [datetime] NULL,&#xA;&#x9;[Duration] [bigint] NULL,&#xA;&#x9;Servername sysname NULL,&#xA;&#x9;Databasename sysname NULL,&#xA;&#x9;CubeName sysname NULL,&#xA;&#x9;MeasureIdName sysname NULL,&#xA;&#x9;DateKey&#x9;int NULL,&#xA;&#x9;TimeHour int NULL,&#xA;&#x9;TimeMinute int NULL&#xA;) ON [PRIMARY]&#xA;&#xA;create nonclustered index ncx_olapquerylog on olapquerylog (MeasureIdName,CubeName,Databasename,Servername)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\QueryID and Dimension Attribute Usage Bridge - Load"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C46AC713-363B-45D1-B8E9-535B71C1AC91}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="QueryID and Dimension Attribute Usage Bridge - Load"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          defaultBufferMaxRows="1000000"
+          defaultBufferSize="50485760"
+          version="1">
+          <components>
+            <component
+              refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[BrQueryDimAttrUsage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 1000000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">1000000</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CubeUsageDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CubeUsageDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Datekey]"
+                      cachedDataType="i4"
+                      cachedName="Datekey"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Timekey]"
+                      cachedDataType="i4"
+                      cachedName="Timekey"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UserId]"
+                      cachedDataType="i4"
+                      cachedName="UserId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DimensionAttribId]"
+                      cachedDataType="i4"
+                      cachedName="DimensionAttribId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CubeMeasureGroupId]"
+                      cachedDataType="i4"
+                      cachedName="CubeMeasureGroupId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OLAPQueryLogid]"
+                      cachedDataType="i4"
+                      cachedName="OLAPQueryLogid"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      dataType="i4"
+                      name="Datekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
+                      dataType="i4"
+                      name="Timekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
+                      dataType="i4"
+                      name="UserId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
+                      dataType="i4"
+                      name="DimensionAttribId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
+                      dataType="i4"
+                      name="CubeMeasureGroupId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BrQueryDimAttrUsage]"
+                      dataType="i4"
+                      name="BrQueryDimAttrUsage" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      dataType="i4"
+                      name="QueryId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactCubeUsage_ErrorLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CubeUsageDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CubeUsageDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Datekey]"
+                      cachedDataType="i4"
+                      cachedName="Datekey"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Timekey]"
+                      cachedDataType="i4"
+                      cachedName="Timekey"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[UserId]"
+                      cachedDataType="i4"
+                      cachedName="UserId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CubeMeasureGroupId]"
+                      cachedDataType="i4"
+                      cachedName="CubeMeasureGroupId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Errorcode]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[OLAPQueryLogid]"
+                      cachedDataType="i4"
+                      cachedName="OLAPQueryLogid"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]" />
+                    <inputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DimensionAttribId]"
+                      cachedDataType="i4"
+                      cachedName="DimensionAttribId"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CubeUsageId]"
+                      dataType="i4"
+                      name="CubeUsageId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Datekey]"
+                      dataType="i4"
+                      name="Datekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Timekey]"
+                      dataType="i4"
+                      name="Timekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UserId]"
+                      dataType="i4"
+                      name="UserId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CubeMeasureGroupId]"
+                      dataType="i4"
+                      name="CubeMeasureGroupId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Errorcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Errorcode" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="ErrorColumn" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QueryId]"
+                      dataType="i4"
+                      name="QueryId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DimensionAttribId]"
+                      dataType="i4"
+                      name="DimensionAttribId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+AttribInner.OLAPQueryLogid,DDA.Datekey,DT.Timekey,DU.UserId,DD.DimensionAttribId,DMG.CubeMeasureGroupId
+		  FROM 
+		(
+				SELECT Q.OLAPQueryLogid
+					  ,OS.OLAPServerId
+					  ,OD.OLAPDatabaseId
+					  ,OC.OLAPCubeId
+					  ,OCD.OLAPCubeDimensionId
+					  ,OA.OLAPAttributeId
+					  ,OMG.OLAPMeasureGroupId
+					  ,Attribused = SUBSTRING(REPLACE(Q.DataSet,',',''),OMGAR.Attribrank,1)
+					  ,Q.Datekey
+					  ,Q.TimeHour
+					  ,Q.TimeMinute
+					  ,isnull(Q.MSOLAP_User,'Unknown') as MSOLAP_User
+					  ,Q.Duration
+				  FROM OLAPMeasureGroupAttribRank OMGAR
+				  JOIN OLAPMeasureGroup OMG
+					ON OMGAR.OLAPMeasureGroupId = OMG.OLAPMeasureGroupId
+				  JOIN OLAPCubeDimension OCD
+					ON OCD.OLAPCubeDimensionId = OMGAR.OLAPCubeDimensionId
+				  JOIN OLAPAttribute OA
+					ON OMGAR.OLAPCubeDimensionId = OA.OLAPCubeDimensionId
+				   AND OMGAR.OLAPAttributeId = OA.OLAPAttributeId
+				  JOIN OLAPCube OC
+					ON OC.OLAPCubeId = OMGAR.OLAPCubeId
+				  JOIN OLAPDatabase OD
+					ON OD.OLAPDatabaseId = OMGAR.OLAPDatabaseId
+				  JOIN OLAPServer OS
+					ON OS.OLAPServerId = OMGAR.OLAPServerId
+				  JOIN OlapQueryLog Q
+					ON Q.MeasureIdName = OMG.OLAPMeasureGroupIDName
+				   AND Q.CubeName	   = OC.OLAPCubeName
+				   AND Q.Databasename  = OD.OLAPDatabasename
+				   AND Q.Servername	   = OS.OLAPServername
+AND Q.OLAPQueryLogid &lt;= 10000000
+		)		 AttribInner
+		JOIN  DimDimension DD
+		  ON  DD.ServerId		= AttribInner.OLAPServerId
+	     AND  DD.DatabaseId		= AttribInner.OLAPDatabaseId
+		 AND  DD.CubeId			= AttribInner.OLAPCubeId
+		 AND  DD.DimensionId	= AttribInner.OLAPCubeDimensionId
+		 AND  DD.AttribId		= AttribInner.OLAPAttributeId
+		JOIN  DimMeasureGroup DMG
+		  ON  DMG.ServerId				= AttribInner.OLAPServerId
+	     AND  DMG.DatabaseId			= AttribInner.OLAPDatabaseId
+		 AND  DMG.CubeId				= AttribInner.OLAPCubeId
+		 AND  DMG.MeasurGroupId			= AttribInner.OLAPMeasureGroupId
+		JOIN  DimDate DDA
+		  ON  DDA.Datekey	    = AttribInner.Datekey
+		JOIN  DimTime Dt
+		  ON  DT.[Hour]			= AttribInner.TimeHour
+		 AND  DT.[Minute]		= AttribInner.TimeMinute
+		JOIN  DimUser DU
+		  ON  DU.UserName	    = AttribInner.MSOLAP_User
+	   WHERE AttribInner.Attribused	= 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CubeUsageDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CubeUsageDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Datekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Datekey]"
+                      name="Datekey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Timekey]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[Timekey]"
+                      name="Timekey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserId]"
+                      name="UserId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimensionAttribId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimensionAttribId]"
+                      name="DimensionAttribId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CubeMeasureGroupId]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[CubeMeasureGroupId]"
+                      name="CubeMeasureGroupId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[OLAPQueryLogid]"
+                      name="OLAPQueryLogid"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Datekey]"
+                      dataType="i4"
+                      name="Datekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Timekey]"
+                      dataType="i4"
+                      name="Timekey" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserId]"
+                      dataType="i4"
+                      name="UserId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimensionAttribId]"
+                      dataType="i4"
+                      name="DimensionAttribId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CubeMeasureGroupId]"
+                      dataType="i4"
+                      name="CubeMeasureGroupId" />
+                    <externalMetadataColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OLAPQueryLogid]"
+                      dataType="i4"
+                      name="OLAPQueryLogid" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OLAPQueryLogid]"
+                      name="OLAPQueryLogid" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Datekey]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Datekey]"
+                      name="Datekey" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Timekey]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Timekey]"
+                      name="Timekey" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserId]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserId]"
+                      name="UserId" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimensionAttribId]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimensionAttribId]"
+                      name="DimensionAttribId" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CubeMeasureGroupId]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CubeMeasureGroupId]"
+                      name="CubeMeasureGroupId" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\QueryID and Dimension Attribute Usage Bridge - Load.Paths[OLE DB Destination Error Output]"
+              endId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              name="OLE DB Destination Error Output"
+              startId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Outputs[OLE DB Destination Error Output]" />
+            <path
+              refId="Package\QueryID and Dimension Attribute Usage Bridge - Load.Paths[OLE DB Source Output]"
+              endId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -3014,13 +4046,21 @@ WHERE MSOLAP_Database = ?</property>
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Load Dimensions" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{6AD07A07-6B1F-4C38-AC18-0B5F67DD7EF0}"
+      DTS:From="Package\QueryID and Dimension Attribute Usage Bridge - Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Cube Usage Fact - Load" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
       DTS:DTSID="{7A0F5294-9046-42E6-8F17-7F16A84C4259}"
       DTS:From="Package\Load Dimensions"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
-      DTS:To="Package\Cube Usage Fact - Load" />
+      DTS:To="Package\QueryID and Dimension Attribute Usage Bridge - Load" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -3033,21 +4073,21 @@ WHERE MSOLAP_Database = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="212,44"
-          Id="Package\Cube Usage Fact - Load"
-          TopLeft="504.669811320755,984.405660377358" />
+          Size="335,42"
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load"
+          TopLeft="708.558700209644,1011.8501048218" />
         <NodeLayout
-          Size="270.4,44"
+          Size="270,44"
           Id="Package\Dimension and Fact Tables - Create"
-          TopLeft="476.594339622641,567.38679245283" />
+          TopLeft="741.594339622641,567.38679245283" />
         <NodeLayout
           Size="200,44"
           Id="Package\Load Cube Metadata using AMO\Analysis Management Object - AMO"
           TopLeft="72.8679245283019,118.547169811321" />
         <NodeLayout
-          Size="209.6,44"
+          Size="210,44"
           Id="Package\Load Cube Metadata using AMO\Attribute Ranking for Dimension Usage"
           TopLeft="67.5094339622641,198.924528301887" />
         <NodeLayout
@@ -3109,52 +4149,102 @@ WHERE MSOLAP_Database = ?</property>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="317.6,305.6"
-          Size="317.6,349.6"
+          PanelSize="318,306"
+          Size="318,350"
           Id="Package\Load Cube Metadata using AMO"
-          TopLeft="5.5,74.5188679245283" />
+          TopLeft="270.5,74.5188679245283" />
         <NodeLayout
-          Size="226.4,44"
+          Size="226,44"
           Id="Package\Load Dimensions\Date Dimesnion - Load"
           TopLeft="84.6415094339623,31.8301886792453" />
         <NodeLayout
-          Size="234.4,44"
+          Size="234,44"
           Id="Package\Load Dimensions\Dimension Dimension - Load"
           TopLeft="378.188679245283,107.867924528302" />
         <NodeLayout
-          Size="226.4,44"
+          Size="226,44"
           Id="Package\Load Dimensions\MeasureGroup Dimension - Load"
           TopLeft="383.132075471698,173.716981132075" />
         <NodeLayout
-          Size="228.8,44"
+          Size="229,44"
           Id="Package\Load Dimensions\Time Dimension - Load"
           TopLeft="377.132075471698,33.2264150943397" />
         <NodeLayout
-          Size="245.6,44"
+          Size="246,44"
           Id="Package\Load Dimensions\User Dimension - Delete"
           TopLeft="87.6226415094339,106.056603773585" />
         <NodeLayout
-          Size="232.8,44"
+          Size="186,42"
           Id="Package\Load Dimensions\User Dimension - Load"
           TopLeft="93.5094339622642,179.452830188679" />
         <EdgeLayout
           Id="Package\Load Dimensions.PrecedenceConstraints[Constraint]"
-          TopLeft="210.415094339623,149.981132075472">
+          TopLeft="210.622641509434,150.056603773585">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-0.603773584905696,29.4716981132076"
+              EndConnector="-24.1132075471697,29.396226415094"
               Start="0,0"
-              End="-0.603773584905696,21.9716981132076">
+              End="-24.1132075471697,21.896226415094">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.7169811320755" />
+                    End="0,10.698113207547" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.698113207547"
+                    Point2="0,14.698113207547"
+                    Point3="-4,14.698113207547" />
                   <mssgle:LineSegment
-                    End="-0.603773584905696,14.7169811320755" />
+                    End="-20.1132075471697,14.698113207547" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-20.1132075471697,14.698113207547"
+                    Point2="-24.1132075471697,14.698113207547"
+                    Point3="-24.1132075471697,18.698113207547" />
                   <mssgle:LineSegment
-                    End="-0.603773584905696,21.9716981132076" />
+                    End="-24.1132075471697,21.896226415094" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Load Dimensions\Query Dimension - Delete"
+          TopLeft="638.641509433962,115.452830188679" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Load Dimensions\Query Dimension - Load"
+          TopLeft="634.641509433962,179.452830188679" />
+        <EdgeLayout
+          Id="Package\Load Dimensions.PrecedenceConstraints[Constraint 1]"
+          TopLeft="838.641509433962,136.452830188679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11,64"
+              Start="0,0"
+              End="-3.5,64">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,60" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,60"
+                    Point2="22.5,64"
+                    Point3="18.5,64" />
+                  <mssgle:LineSegment
+                    End="-3.5,64" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3166,16 +4256,16 @@ WHERE MSOLAP_Database = ?</property>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="732,251.2"
-          Size="732,294.4"
+          PanelSize="908,248"
+          Size="908,292"
           Id="Package\Load Dimensions"
-          TopLeft="244.556603773585,659.084905660377" />
+          TopLeft="333.556603773585,659.084905660377" />
         <NodeLayout
-          Size="213.6,44"
+          Size="214,44"
           Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data"
           TopLeft="17.8867924528303,110.849056603774" />
         <NodeLayout
-          Size="204.8,44"
+          Size="205,44"
           Id="Package\Load QueryLog data from QueryLog Server\OLAPQueryLog Table - Delete"
           TopLeft="22.7924528301887,28.5849056603774" />
         <EdgeLayout
@@ -3207,73 +4297,21 @@ WHERE MSOLAP_Database = ?</property>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="318.4,207.2"
-          Size="318.4,251.2"
+          PanelSize="318,207"
+          Size="318,251"
           Id="Package\Load QueryLog data from QueryLog Server"
-          TopLeft="621.990566037736,79.5754716981132" />
+          TopLeft="886.990566037736,79.5754716981132" />
         <NodeLayout
-          Size="317.6,44"
+          Size="199,42"
           Id="Package\MetaData Tables - Create"
-          TopLeft="6.5566037735849,5.5" />
+          TopLeft="271.556603773585,5.5" />
         <NodeLayout
-          Size="320.8,44"
+          Size="321,44"
           Id="Package\Query Log Table - Create"
-          TopLeft="620.330188679245,7.68867924528303" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="165.27358490566,49.4245283018868">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-1.16981132075472,25.0943396226415"
-              Start="0,0"
-              End="-1.16981132075472,17.5943396226415">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.5660377358491" />
-                  <mssgle:LineSegment
-                    End="-1.16981132075472,12.5660377358491" />
-                  <mssgle:LineSegment
-                    End="-1.16981132075472,17.5943396226415" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="780.556603773585,51.6132075471698">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0.830188679245225,27.9622641509434"
-              Start="0,0"
-              End="0.830188679245225,20.4622641509434">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14" />
-                  <mssgle:LineSegment
-                    End="0.830188679245225,14" />
-                  <mssgle:LineSegment
-                    End="0.830188679245225,20.4622641509434" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="885.330188679245,7.68867924528303" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="164.103773584906,424.330188679245">
+          TopLeft="429.103773584906,424.330188679245">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3298,34 +4336,8 @@ WHERE MSOLAP_Database = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="611.877358490566,611.311320754717">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-1.20754716981139,47.7735849056604"
-              Start="0,0"
-              End="-1.20754716981139,40.2735849056604">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.8867924528302" />
-                  <mssgle:LineSegment
-                    End="-1.20754716981139,23.8867924528302" />
-                  <mssgle:LineSegment
-                    End="-1.20754716981139,40.2735849056604" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="781.38679245283,330.405660377359">
+          TopLeft="1046.38679245283,330.405660377359">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3350,23 +4362,308 @@ WHERE MSOLAP_Database = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="610.669811320755,953.877358490566">
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="371.056603773585,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-0.18867924528297,30.5283018867924"
+              EndConnector="58.4433962264151,27.0188679245283"
               Start="0,0"
-              End="-0.18867924528297,23.0283018867924">
+              End="58.4433962264151,19.5188679245283">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.2452830188679" />
+                    End="0,9.50943396226415" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.50943396226415"
+                    Point2="0,13.5094339622642"
+                    Point3="4,13.5094339622642" />
                   <mssgle:LineSegment
-                    End="-0.18867924528297,15.2452830188679" />
+                    End="54.4433962264151,13.5094339622642" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.4433962264151,13.5094339622642"
+                    Point2="58.4433962264151,13.5094339622642"
+                    Point3="58.4433962264151,17.5094339622642" />
                   <mssgle:LineSegment
-                    End="-0.18867924528297,23.0283018867924" />
+                    End="58.4433962264151,19.5188679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="1045.55660377359,51.6132075471698">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0.830188679245225,27.9622641509434"
+              Start="0,0"
+              End="0.830188679245225,20.4622641509434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:LineSegment
+                    End="0.830188679245225,14" />
+                  <mssgle:LineSegment
+                    End="0.830188679245225,20.4622641509434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="876.594339622641,611.38679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-89.0377358490559,47.698113207547"
+              Start="0,0"
+              End="-89.0377358490559,40.198113207547">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8490566037735" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.8490566037735"
+                    Point2="0,23.8490566037735"
+                    Point3="-4,23.8490566037735" />
+                  <mssgle:LineSegment
+                    End="-85.0377358490559,23.8490566037735" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-85.0377358490559,23.8490566037735"
+                    Point2="-89.0377358490559,23.8490566037735"
+                    Point3="-89.0377358490559,27.8490566037735" />
+                  <mssgle:LineSegment
+                    End="-89.0377358490559,40.198113207547" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="787.556603773585,951.084905660377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.5020964360589,60.7651991614255"
+              Start="0,0"
+              End="88.5020964360589,53.2651991614255">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3825995807127" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3825995807127"
+                    Point2="0,30.3825995807127"
+                    Point3="4,30.3825995807127" />
+                  <mssgle:LineSegment
+                    End="84.5020964360589,30.3825995807127" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.5020964360589,30.3825995807127"
+                    Point2="88.5020964360589,30.3825995807127"
+                    Point3="88.5020964360589,34.3825995807127" />
+                  <mssgle:LineSegment
+                    End="88.5020964360589,53.2651991614255" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Cube Usage Fact - Load"
+          TopLeft="765,1089" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="876.058700209644,1053.8501048218">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15.5587002096439,35.1498951781975"
+              Start="0,0"
+              End="-15.5587002096439,27.6498951781975">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5749475890988" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5749475890988"
+                    Point2="0,17.5749475890988"
+                    Point3="-4,17.5749475890988" />
+                  <mssgle:LineSegment
+                    End="-11.5587002096439,17.5749475890988" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11.5587002096439,17.5749475890988"
+                    Point2="-15.5587002096439,17.5749475890988"
+                    Point3="-15.5587002096439,21.5749475890988" />
+                  <mssgle:LineSegment
+                    End="-15.5587002096439,27.6498951781975" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Remember, when a cube gets new structure e.g. new attributes in&#xD;&#xA; dimension or measures, we cannot use previously loaded data from the querylog"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="460,60"
+          Id="b86b586e-beeb-4ad6-90be-08c7bbebcb98"
+          TopLeft="590,344" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\QueryID and Dimension Attribute Usage Bridge - Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="180,42"
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination"
+          TopLeft="10,107.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source"
+          TopLeft="20.5,5.5" />
+        <EdgeLayout
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load.Paths[OLE DB Source Output]"
+          TopLeft="95.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\QueryID and Dimension Attribute Usage Bridge - Load.Paths[OLE DB Destination Error Output]"
+          TopLeft="95.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,20.533203125,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\QueryID and Dimension Attribute Usage Bridge - Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load Dimensions\User Dimension - Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Dimensions\User Dimension - Load\OLE DB Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Dimensions\User Dimension - Load\OLE DB Source"
+          TopLeft="16,5.5" />
+        <EdgeLayout
+          Id="Package\Load Dimensions\User Dimension - Load.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3377,6 +4674,271 @@ WHERE MSOLAP_Database = ?</property>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
-  </Package>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimensions\User Dimension - Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimensions\User Dimension - Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data\OLE DB Source"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data\Derived Column"
+          TopLeft="14,107.5" />
+        <EdgeLayout
+          Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data.Paths[Derived Column Output]"
+          TopLeft="91,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load QueryLog data from QueryLog Server\Load Query Log Data from the query log data\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Cube Usage Fact - Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Cube Usage Fact - Load\OLE DB Destination 1"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cube Usage Fact - Load\OLE DB Destination"
+          TopLeft="10,107.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Cube Usage Fact - Load\OLE DB Source"
+          TopLeft="20.5,5.5" />
+        <EdgeLayout
+          Id="Package\Cube Usage Fact - Load.Paths[OLE DB Source Output]"
+          TopLeft="95.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cube Usage Fact - Load.Paths[OLE DB Destination Error Output]"
+          TopLeft="95.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,20.533203125,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cube Usage Fact - Load\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cube Usage Fact - Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cube Usage Fact - Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load Dimensions\Query Dimension - Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Dimensions\Query Dimension - Load\OLE DB Source"
+          TopLeft="16,5.5" />
+        <EdgeLayout
+          Id="Package\Load Dimensions\Query Dimension - Load.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimensions\Query Dimension - Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimensions\Query Dimension - Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

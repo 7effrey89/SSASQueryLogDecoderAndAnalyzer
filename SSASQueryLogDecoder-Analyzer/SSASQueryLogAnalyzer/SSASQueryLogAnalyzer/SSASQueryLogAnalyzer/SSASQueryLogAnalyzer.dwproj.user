@@ -3,7 +3,7 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <TargetServer>localhost</TargetServer>
+        <TargetServer>VDA1CD2326\VDA1CD2326</TargetServer>
         <TargetDatabase>SSASQueryLogAnalyzer</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>
